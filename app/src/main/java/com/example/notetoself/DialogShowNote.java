@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class DialogShowNote extends DialogFragment {
     private Note note;
+    Random randGenerator = new Random();
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -46,7 +50,8 @@ public class DialogShowNote extends DialogFragment {
         return builder.create();
     }
 
-    public void sendNoteSelected (Note noteSelected) {
-        this.note = noteSelected;
+    public void sendNoteSelected (ArrayList<Note> note) {
+        int randInt = randGenerator.nextInt(note.size());
+        this.note = note.get(randInt);
     }
 }
