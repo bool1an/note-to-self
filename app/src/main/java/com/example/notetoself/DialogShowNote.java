@@ -14,8 +14,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DialogShowNote extends DialogFragment {
+    TextView txtTitle;
+    TextView txtDescription;
+    TextView txtToDo;
+    TextView txtImportant;
+    TextView txtIdea;
     private Note note;
     Random randGenerator = new Random();
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -23,12 +29,12 @@ public class DialogShowNote extends DialogFragment {
 
         View dialogView = layoutInflater.inflate(R.layout.dialog_show_note, null);
 
-        final TextView txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
-        final TextView txtDescription = (TextView) dialogView.findViewById(R.id.txtTitle);
+        txtTitle = (TextView) dialogView.findViewById(R.id.txtTitle);
+        txtDescription = (TextView) dialogView.findViewById(R.id.txtTitle);
         Button btnOk = (Button) dialogView.findViewById(R.id.btnOk);
-        final TextView txtToDo = (TextView) dialogView.findViewById(R.id.textViewTodo);
-        final TextView txtImportant = (TextView) dialogView.findViewById(R.id.textViewImportant);
-        final TextView txtIdea = (TextView) dialogView.findViewById(R.id.textViewIdea);
+        txtToDo = (TextView) dialogView.findViewById(R.id.textViewTodo);
+        txtImportant = (TextView) dialogView.findViewById(R.id.textViewImportant);
+        txtIdea = (TextView) dialogView.findViewById(R.id.textViewIdea);
 
         txtTitle.setText(note.getTitle());
         txtDescription.setText(note.getDescription());
@@ -47,11 +53,10 @@ public class DialogShowNote extends DialogFragment {
                 dismiss();
             }
         });
-        return builder.create();
+        return builder.setView(dialogView).create();
     }
 
-    public void sendNoteSelected (ArrayList<Note> note) {
-        int randInt = randGenerator.nextInt(note.size());
-        this.note = note.get(randInt);
+    public void sendNoteSelected(Note note) {
+        this.note = note;
     }
 }

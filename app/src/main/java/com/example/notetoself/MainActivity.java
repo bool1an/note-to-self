@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Note> newNote = new ArrayList<>();
+    ArrayList<Note> notes = new ArrayList<>();
     RecyclerView recyclerView;
     NoteAdapter adapter;
 
@@ -46,8 +46,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void showNote(int index) {
+        DialogShowNote dialog = new DialogShowNote();
+        dialog.sendNoteSelected(notes.get(index));
+        dialog.show(getSupportFragmentManager(), "");
+    }
+
     public void createNewNote(Note note) {
-        newNote.add(note);
+        notes.add(note);
         adapter.notifyDataSetChanged();
     }
 

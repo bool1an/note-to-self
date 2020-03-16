@@ -13,9 +13,7 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListItemHolder> {
     private List<Note> noteList;
     private MainActivity mainActivity;
-    TextView title;
-    TextView status;
-    TextView description;
+
 
     public NoteAdapter(MainActivity mainActivity, List<Note> noteList) {
         this.mainActivity = mainActivity;
@@ -28,11 +26,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListItemHolder
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.listitem, parent, false);
         return new ListItemHolder(itemView);
     }
-    public void showNote(int index) {
-        DialogShowNote dialog = new DialogShowNote();
-        dialog.sendNoteSelected(notes.get(index));
-        dialog.show(getSupportFragmentManager(), "");
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull NoteAdapter.ListItemHolder holder, int position) {
@@ -64,13 +58,18 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ListItemHolder
     }
 
     public class ListItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
-        public ListItemHolder(@NonNull View itemView) {
+        TextView title;
+        TextView status;
+        TextView description;
+
+        public ListItemHolder(@NonNull View view) {
+            super(view);
             title = view.findViewById(R.id.textViewTitle);
             status = view.findViewById(R.id.textViewStatus);
             description = view.findViewById(R.id.textViewDescription);
             view.setClickable(true);
             view.setOnClickListener(this);
-            super(itemView);
+
         }
 
         @Override
